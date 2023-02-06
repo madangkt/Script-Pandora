@@ -3,13 +3,9 @@
 --//DONT RESELL THIS SCRIPT 
 
 
-botList = {
-    "AMBATUKAM1",
-    "AMBATUKAM2",
-    "AMBATUKAM3",
-}
-password = "@mbatukam1"
-Wbot = "YOUR WORLD" --// apa aja asal botnya di world itu
+botList = {"","","","",""} --// UNLIMITED BOT 
+password = "@mbatukam1" --// YOUR BOT PASSWORD
+Wbot = "YOUR WORLD" --// PUT ANYTHING AND UR BOT WILL JOINED WORLD
 delayreconnect = 7000 --// PUT 10000 IF U WANT TO BYPASS AAP
 
 --// BANG UDAH BANG
@@ -29,13 +25,13 @@ function summontuyul(world)
         sleep(delayreconnect)
         end
     if getBot().status == "suspended" or getBot().status == "banned" then
-        log(getBot().name.." | SUSPENDED")
-        sleep(5000)
+        log(getBot().name.." | SUSPENDED / BANNED")
+        sleep(500)
         removeBot(getBot().name)
         sleep(1000)
     elseif getBot().status == "online" then
-        log(getBot().name.." | ALIVE")
-        sleep(5000)
+        log(getBot().name.." | ALIVE | LEVEL "..getBot().level.." | GEMS "..findItem(112))
+        sleep(500)
         while getBot().world ~= world do
             sendPacket(3,"action|join_request\nname|" ..world.."\ninvitedWorld|0")
             sleep(5000)
@@ -45,3 +41,5 @@ function summontuyul(world)
     end
 end
 end
+
+summontuyul(Wbot)
