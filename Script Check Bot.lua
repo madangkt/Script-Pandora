@@ -17,7 +17,7 @@ end
 
 function summontuyul(world)
     for i, lojin in ipairs(botList) do
-    addBbot(lojin,password)
+    addBot(lojin,password)
     sleep(5000)
     setBool("Auto Reconnect", false)
         while getBot().status == "login fail" or getBot().status == "offline" do
