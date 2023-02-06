@@ -1,6 +1,8 @@
---//SCRIPT CHECK BOT MOKAD OR HIDUP
+--//SCRIPT CHECK BOT ALIVE/SUSPENDED/BANNED
 --//SCRIPT MADE BY Madang.EXE#6264
---//DONT RESELL THIS SCRIPT 
+--//DONT RESELL THIS SCRIPT
+--//BYPASS WRONG PASSWORD
+--//BYPASS AAP (delayreconnect = 10000+)
 
 
 botList = {"","","","",""} --// UNLIMITED BOT 
@@ -24,12 +26,15 @@ function summontuyul(world)
         connect()
         sleep(delayreconnect)
         end
-    if getBot().status == "suspended" or getBot().status == "banned" then
-        log(getBot().name.." | SUSPENDED / BANNED")
-        sleep(500)
+    if getBot().status == "suspended" then
+        log(getBot().name.." | SUSPENDED")
         removeBot(getBot().name)
         sleep(1000)
-    elseif getBot().status == "online" then
+ elseif getBot().status == "banned" then
+        log(getBot().name.." | BANNED")
+        removeBot(getBot().name)
+        sleep(1000)
+ elseif getBot().status == "online" then
         log(getBot().name.." | ALIVE | LEVEL "..getBot().level.." | GEMS "..findItem(112))
         sleep(500)
         while getBot().world ~= world do
