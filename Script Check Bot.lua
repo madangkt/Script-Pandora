@@ -7,7 +7,6 @@
 
 botList = {"","","","",""} --// UNLIMITED BOT 
 password = "@mbatukam1" --// YOUR BOT PASSWORD
-Wbot = "YOUR WORLD" --// PUT ANYTHING AND UR BOT WILL JOINED WORLD
 delayreconnect = 7000 --// PUT 10000 IF U WANT TO BYPASS AAP
 
 --// BANG UDAH BANG
@@ -17,7 +16,7 @@ function log(text)
     file:close()
 end
 
-function summontuyul(world)
+function summontuyul()
     for i, lojin in ipairs(botList) do
     addBot(lojin,password)
     sleep(5000)
@@ -37,10 +36,6 @@ function summontuyul(world)
  elseif getBot().status == "online" then
         log(getBot().name.." | ALIVE | LEVEL "..getBot().level.." | GEMS "..findItem(112))
         sleep(500)
-        while getBot().world ~= world do
-            sendPacket(3,"action|join_request\nname|" ..world.."\ninvitedWorld|0")
-            sleep(5000)
-        end
         removeBot(getBot().name)
         sleep(1000)
     end
