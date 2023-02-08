@@ -53,7 +53,7 @@ function summontuyul(world,id,itemid)
                 while not findClothes(itemid) do
                     wear(itemid)
                     sleep(500)
-                    log(getBot().name.." | ALIVE | LEVEL "..getBot().level.." | GEMS "..findItem(112).." | DONE USE PICKAXE")
+                    log(getBot().name.." | ALIVE | LEVEL "..getBot().level.." | GEMS "..findItem(112).." | WORLD = "..getBot().world.." | DONE USE PICKAXE")
                 end                    
                 removeBot(getBot().name)
                 sleep(1000)
