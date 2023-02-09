@@ -61,12 +61,12 @@ function putitem(item)
         if findItem(item) ~= 0 then
         wrench(0,0)
         sleep(500)
-        sendPacket(2,"action|dialog_return\ndialog_name|vending\ntilex|"..math.floor(getBot().x/32).."|\ntiley|"..math.floor(getBot().y/32).."\nbuttonClicked|addstock\n\nsetprice|0\nchk_peritem|0\nchkperlock|1")
-        sleep(2000)
              while getTiles().data >= 4999 do
                 move(1,0)
                 sleep(500)
-            end
+            end            
+        sendPacket(2,"action|dialog_return\ndialog_name|vending\ntilex|"..math.floor(getBot().x/32).."|\ntiley|"..math.floor(getBot().y/32).."\nbuttonClicked|addstock\n\nsetprice|0\nchk_peritem|0\nchkperlock|1")
+        sleep(2000)
         end
     end
     if findItem(item) == 0 or findItem(item) ~= 0 then
