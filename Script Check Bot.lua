@@ -33,7 +33,7 @@ function summontuyul()
         removeBot(getBot().name)
         sleep(1000)
  elseif getBot().status == "online" then
-        log(getBot().name.." | ALIVE | LEVEL "..getBot().level.." | GEMS "..findItem(112))
+        log(getBot().name.." | ALIVE | LEVEL "..getBot().level.." | GEMS "..findItem(112).." | WORLD "..getBot().world)
         sleep(500)
         removeBot(getBot().name)
         sleep(1000)
