@@ -2,7 +2,7 @@
 --//SCRIPT MADE BY Madang.EXE#6264
 --//DONT RESELL THIS SCRIPT
 --//CHECK INVALID EMAIL
---//BYPASS AAP 
+--//TRIGGER AAP 
 
 
 botList = {"","","","",""} --// UNLIMITED BOT 
@@ -30,9 +30,9 @@ function summontuyul()
             removeBot(getBot().name)
             sleep(1000)
  elseif getBot().status == "aap detected" then 
-            log(getBot().name.." | SUCCESS TRIGGER AAP")
-            removeBot(getBot.name)
-            sleep(1000)
+        log(getBot().name.." | SUCCESS TRIGGER AAP")
+        removeBot(getBot.name)
+        sleep(1000)
  elseif getBot().status == "suspended" then
         log(getBot().name.." | SUSPENDED")
         removeBot(getBot().name)
