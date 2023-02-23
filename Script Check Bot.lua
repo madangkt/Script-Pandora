@@ -1,7 +1,8 @@
 --//SCRIPT CHECK BOT ALIVE/SUSPENDED/BANNED
 --//SCRIPT MADE BY Madang.EXE#6264
 --//DONT RESELL THIS SCRIPT
---//BYPASS AAP (delayreconnect = 10000+)
+--//CHECK INVALID EMAIL
+--//BYPASS AAP 
 
 
 botList = {"","","","",""} --// UNLIMITED BOT 
@@ -24,7 +25,15 @@ function summontuyul()
         connect()
         sleep(delayreconnect)
         end
-    if getBot().status == "suspended" then
+      if getBot().status == "invalid email" then
+            log(getBot().name.." | INVALID EMAIL")
+            removeBot(getBot().name)
+            sleep(1000)
+ elseif getBot().status == "aap detected" then 
+            log(getBot().name.." | SUCCESS TRIGGER AAP")
+            removeBot(getBot.name)
+            sleep(1000)
+ elseif getBot().status == "suspended" then
         log(getBot().name.." | SUSPENDED")
         removeBot(getBot().name)
         sleep(1000)
@@ -33,7 +42,7 @@ function summontuyul()
         removeBot(getBot().name)
         sleep(1000)
  elseif getBot().status == "online" then
-        log(getBot().name.." | ALIVE | LEVEL "..getBot().level.." | GEMS "..findItem(112).." | WORLD "..getBot().world)
+        log(getBot().name.." | ONLINE | LEVEL "..getBot().level.." | GEMS "..findItem(112).." | WORLD "..getBot().world)
         sleep(500)
         removeBot(getBot().name)
         sleep(1000)
