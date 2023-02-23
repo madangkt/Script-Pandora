@@ -27,15 +27,23 @@ function summontuyul(world,id,itemid)
             connect()
             sleep(delayReconnect)
         end
-    if getBot().status == "suspended" then
-        log(getBot().name.." | SUSPENDED")
-        removeBot(getBot().name)
-        sleep(1500)
-    elseif getBot().status == "banned" then
-        log(getBot().name.." | BANNED")
-        removeBot(getBot().name)
-        sleep(1500)
-    elseif getBot().status == "online" then       
+         if getBot().status == "invalid email" then
+            log(getBot().name.." | INVALID EMAIL")
+            removeBot(getBot().name)
+            sleep(1000)
+    elseif getBot().status == "aap detected" then 
+            log(getBot().name.." | SUCCESS TRIGGER AAP")
+            removeBot(getBot.name)
+            sleep(1000)
+    elseif  getBot().status == "suspended" then
+            log(getBot().name.." | SUSPENDED")
+            removeBot(getBot().name)
+            sleep(1500)
+    elseif  getBot().status == "banned" then
+            log(getBot().name.." | BANNED")
+            removeBot(getBot().name)
+            sleep(1500)
+    elseif  getBot().status == "online" then       
             sendPacket(3,"action|join_request\nname|" ..world.."\ninvitedWorld|0")
             sleep(5000)
             sendPacket(3,"action|join_request\nname|" ..world.."|"..id.."\ninvitedWorld|0")
@@ -53,7 +61,7 @@ function summontuyul(world,id,itemid)
                 while not findClothes(itemid) do
                     wear(itemid)
                     sleep(500)
-                    log(getBot().name.." | ALIVE | LEVEL "..getBot().level.." | GEMS "..findItem(112).." | WORLD = "..getBot().world.." | DONE USE PICKAXE")
+                    log(getBot().name.." | ONLINE | LEVEL "..getBot().level.." | GEMS "..findItem(112).." | WORLD = "..getBot().world.." | DONE USE PICKAXE")
                 end                    
                 removeBot(getBot().name)
                 sleep(1000)
