@@ -27,7 +27,7 @@ function change(id,newID)
         sleep(2500)
         sendPacket(2,"action|dialog_return\ndialog_name|door_edit\ntilex|"..math.floor(getBot().x/32).."|\ntiley|"..math.floor(getBot().y/32).."|\ndoor_name|mm\ndoor_target|\ndoor_id|"..newID.."\ncheckbox_locked|0")
         sleep(2500)
-        webfucki(" **"..getBot().name:upper().."** IN ||"..getBot().world:upper().."|| CHANGE **"..oldDoorID.."** <:panahpanah:943220544470413372> ||["..newDoorID.."]||")
+        webfucki(" **"..getBot().name:upper().."** IN ||"..getBot().world:upper().."|| CHANGE **"..oldDoorID.."** TO ||["..newDoorID.."]||")
     end
     removeBot(getBot().name)
 end
