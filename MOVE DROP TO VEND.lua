@@ -1,1 +1,1 @@
---//IN PROGRES :V
+say(text)
