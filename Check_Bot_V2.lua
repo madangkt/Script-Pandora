@@ -43,7 +43,7 @@ for i = 1,#botList do
         removeBot(getBot().name)
     elseif getBot().status == "online" then
         log(getBot().name.." | ONLINE | LEVEL "..getBot().level.." | GEMS "..findItem(112).." | WORLD "..getBot().world)
-        pshell(getBot().name:upper().." | ONLINE | LEVEL "..getBot().level.." | GEMS "..findItem(112).." | WORLD **"..getBot().world:upper().."**")
+        pshell("`"..getBot().name:upper().." | ONLINE | LEVEL "..getBot().level.." | GEMS "..findItem(112).." | WORLD : "..getBot().world:upper().."`")
         sleep(800)
         removeBot(getBot().name)
     end
