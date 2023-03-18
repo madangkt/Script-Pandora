@@ -23,22 +23,22 @@ for i = 1,#botList do
     end
     if getBot().status == "invalid email" then
         log(getBot().name.." | INVALID EMAIL")
-        pshell(getBot().name:upper().." | INVALID EMAIL")
+        pshell("`"..getBot().name:upper().." | INVALID EMAIL`")
         sleep(800)
         removeBot(getBot().name)
     elseif getBot().status == "aap detected" then 
         log(getBot().name.." | AAP DETECTED")
-        pshell(getBot().name:upper().." | AAP DETECTED")
+        pshell("`"..getBot().name:upper().." | AAP DETECTED`")
         sleep(800)
         removeBot(getBot.name)
     elseif getBot().status == "suspended" then
         log(getBot().name.." | SUSPENDED")
-        pshell(getBot().name:upper().." | SUSPENDED")
+        pshell("`"..getBot().name:upper().." | SUSPENDED`")
         sleep(800)
         removeBot(getBot().name)
     elseif getBot().status == "banned" then
         log(getBot().name.." | BANNED")
-        pshell(getBot().name:upper().." | BANNED")
+        pshell("`"..getBot().name:upper().." | BANNED`")
         sleep(800)
         removeBot(getBot().name)
     elseif getBot().status == "online" then
