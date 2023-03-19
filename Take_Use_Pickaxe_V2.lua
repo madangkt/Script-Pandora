@@ -99,4 +99,4 @@ for i = 1,#botList do
         end
     end
 end
-webfucki("`TOTAL BOT USING PICKAXE : "..total)
+webfucki("`TOTAL BOT USING PICKAXE : `"..total)
