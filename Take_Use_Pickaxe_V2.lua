@@ -40,7 +40,8 @@ function join(world,id)
         sleep(1000)
     end
 end
-
+local total = 0
+webfucki("@everyone `SCRIPT TAKE & USE PICKAXE MADE By` <@895235665980194816>")
 for i = 1,#botList do
     addBot(botList[i],password)
     sleep(5000)
@@ -61,11 +62,13 @@ for i = 1,#botList do
             if findClothes(98) then
                 webfucki("`"..getBot().name:upper().." DONE USE PICKAXE`")
                 sleep(500)
+                total = total + 1
                 removeBot(getBot().name)
             end
         elseif findItem(98) > 0 and findClothes(98) then
             webfucki("`"..getBot().name:upper().." ALREADY USING PICKAXE`")
             sleep(500)
+            total = total + 1
             removeBot(getBot().name)
         elseif findItem(98) == 0 then 
             join(worldPX,doorPX)
@@ -76,8 +79,10 @@ for i = 1,#botList do
                 if findItem(98) ~= 1 then
                     collectSet(false,3)
                     while findItem(98) ~= 1 do
-                        drop(98,(findItem(98)-1))
+                        move(-1,0)
                         sleep(1000)
+                        drop(98,(findItem(98)-1))
+                        sleep(500)
                     end
                     while not findClothes(98) do
                         wear(98)
@@ -86,6 +91,7 @@ for i = 1,#botList do
                     if findClothes(98) then
                         webfucki("`"..getBot().name:upper().." DONE USE PICKAXE`")
                         sleep(500)
+                        total = total + 1
                         removeBot(getBot().name)
                     end
                 end
@@ -93,3 +99,4 @@ for i = 1,#botList do
         end
     end
 end
+webfucki("`TOTAL BOT USING PICKAXE : "..total)
