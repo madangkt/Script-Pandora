@@ -105,12 +105,12 @@ for i = 1,#botList do
                         sleep(900)
                     end
                     if findClothes(98) then
-                        webfucki("`"..getBot().name:upper().." DONE USE PICKAXE`")
-                        sleep(500)
-                        total = total + 1
                         join(acakbang(letter,char_set))
                         sleep(1000)
+                        webfucki("`"..getBot().name:upper().." DONE USE PICKAXE`")
+                        sleep(500)            
                         removeBot(getBot().name)
+                        total = total + 1
                     end
                 end
             elseif scanFloat(98) == 0 then
