@@ -1,4 +1,6 @@
 --[ MAIN CODE ]--
+local letter = 6
+local char_set  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 function webfucki(status)
     local wh = {}
     wh.url = webfuck
@@ -17,6 +19,15 @@ function scanFloat(itemid)
     return count
 end
 
+function acakbang(banyak_huruf, karakter_yg_mau_di_acak)
+    local hasil = {}
+    for i = 1,banyak_huruf do
+        local index = math.random(#karakter_yg_mau_di_acak)
+        hasil[i] = karakter_yg_mau_di_acak:sub(index , index)
+    end
+    return table.concat(hasil)
+end
+
 function goFloat(id)
     for _, obj in pairs(getObjects()) do
         if obj.id == id then
@@ -33,13 +44,18 @@ function goFloat(id)
 end
 
 function join(world,id)
-    sendPacket(3,"action|join_request\nname|"..world:upper().."\ninvitedWorld|0")
-    sleep(5000)
-    while getTile(math.floor(getBot().x / 32),math.floor(getBot().y / 32)).fg == 6 do
-        sendPacket(3,"action|join_request\nname|"..world:upper().."|"..id:upper().."\ninvitedWorld|0")
-        sleep(1000)
+    while getBot().world ~= world:upper() do
+        sendPacket(3,"action|join_request\nname|"..world:upper().."\ninvitedWorld|0")
+        sleep(5000)
+    end
+    if id ~= "" then
+        while getTile(math.floor(getBot().x / 32),math.floor(getBot().y / 32)).fg == 6 do
+            sendPacket(3,"action|join_request\nname|"..world:upper().."|"..id:upper().."\ninvitedWorld|0")
+            sleep(1000)
+         end
     end
 end
+
 local total = 0
 webfucki("@everyone `SCRIPT TAKE & USE PICKAXE MADE By` <@895235665980194816>")
 for i = 1,#botList do
@@ -92,6 +108,8 @@ for i = 1,#botList do
                         webfucki("`"..getBot().name:upper().." DONE USE PICKAXE`")
                         sleep(500)
                         total = total + 1
+                        join(acakbang(letter,char_set))
+                        sleep(1000)
                         removeBot(getBot().name)
                     end
                 end
