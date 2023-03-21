@@ -56,24 +56,30 @@ function join(world,id)
     end
 end
 
+function joinK(world)
+    while getBot().world ~= world:upper() do
+        sendPacket(3,"action|join_request\nname|"..world:upper().."\ninvitedWorld|0")
+        sleep(5000)
+    end
+end
+
 local total = 0
 webfucki("@everyone `SCRIPT TAKE & USE PICKAXE MADE By` <@895235665980194816>")
 for i = 1,#botList do
     addBot(botList[i],password)
     sleep(5000)
+    setBool("Auto Reconnect",false)
     while getBot().status == "offline" or getBot().status == "login fail" do
-    connect()
-    sleep(15000)
+        connect()
+        sleep(5000)
     end
     if getBot().status == "online" then
-        if findItem(98) > 0 and not findClothes(98) then
-            join(acakbang(letter,char_set))
+        if findItem(98) ~= 0 and not findClothes(98) then
+            joinK(acakbang(letter,char_set))
             sleep(1000)
-            if not findClothes(98) then
-                while not findClothes(98) do
-                    wear(98)
-                    sleep(1000)
-                end
+            while not findClothes(98) do
+                wear(98)
+                sleep(1000)
             end
             if findClothes(98) then
                 webfucki("`"..getBot().name:upper().." DONE USE PICKAXE`")
@@ -81,13 +87,15 @@ for i = 1,#botList do
                 total = total + 1
                 removeBot(getBot().name)
             end
-        elseif findItem(98) > 0 and findClothes(98) then
-            join(acakbang(letter,char_set))
-            sleep(1000)
-            webfucki("`"..getBot().name:upper().." ALREADY USING PICKAXE`")
-            sleep(500)
-            total = total + 1
-            removeBot(getBot().name)
+        elseif findItem(98) ~= 0 and findClothes(98) then
+            if findClothes(98) then
+                joinK(acakbang(letter,char_set))
+                sleep(1000)
+                webfucki("`"..getBot().name:upper().." ALREADY USING PICKAXE`")
+                sleep(500)
+                total = total + 1
+                removeBot(getBot().name)
+            end
         elseif findItem(98) == 0 then 
             join(worldPX,doorPX)
             sleep(1000)
@@ -107,7 +115,7 @@ for i = 1,#botList do
                         sleep(900)
                     end
                     if findClothes(98) then
-                        join(acakbang(letter,char_set))
+                        joinK(acakbang(letter,char_set))
                         sleep(1000)
                         webfucki("`"..getBot().name:upper().." DONE USE PICKAXE`")
                         sleep(500)            
