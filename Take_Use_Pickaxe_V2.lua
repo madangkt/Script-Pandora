@@ -67,7 +67,7 @@ for i = 1,#botList do
     end
     if getBot().status == "online" then
         if findItem(98) > 0 and not findClothes(98) then
-            join(worldPX,doorPX)
+            join(acakbang(letter,char_set))
             sleep(1000)
             if not findClothes(98) then
                 while not findClothes(98) do
