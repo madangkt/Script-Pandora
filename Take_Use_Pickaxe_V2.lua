@@ -102,8 +102,9 @@ for i = 1,#botList do
             if scanFloat(98) > 0 then
                 goFloat(98)
                 sleep(1000)
-                if findItem(98) >= 1 then
+                if findItem(98) > 1 then
                     collectSet(false,3)
+                    sleep(500)
                     while findItem(98) ~= 1 do
                         move(-1,0)
                         sleep(1000)
