@@ -127,8 +127,10 @@ for i = 1,#botList do
             elseif scanFloat(98) == 0 then
                 webfucki("PICKAXE SUDAH HABIS")
                 removeBot(getBot().name)
+                error()
             end
         end
     end
 end
 webfucki("`TOTAL BOT USING PICKAXE : `"..total)
+error()
