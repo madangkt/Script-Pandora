@@ -91,8 +91,10 @@ for i = 1,#botList do
         webfucki("`"..getBot().name:upper().." AAP DETECTED`")
         removeBot(getBot().name)
     elseif getBot().status == "online" then
-        join(worldTake,doorTake)
-        sleep(500)
+        while getBot().world ~= worldTake:upper() do
+            join(worldTake,doorTake)
+            sleep(500)
+        end
         if findItem(clothes) > 0 and not findClothes(clothes) then
             while not findClothes(clothes) do
                 wear(clothes)
