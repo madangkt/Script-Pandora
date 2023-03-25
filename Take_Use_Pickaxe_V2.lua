@@ -5,7 +5,7 @@ local char_set  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 function webfucki(status)
     local wh = {}
     wh.url = webfuck
-    wh.username = "M A D S | Take CLOTHES"
+    wh.username = "M A D S | Take Clothes"
     wh.content = status
     webhook(wh)
 end
