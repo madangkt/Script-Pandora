@@ -1,10 +1,11 @@
 --[ MAIN CODE ]--
-local letter = 6
+local letter = 7
 local char_set  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+
 function webfucki(status)
     local wh = {}
     wh.url = webfuck
-    wh.username = "M A D S | Take Pickaxe"
+    wh.username = "M A D S | Take CLOTHES"
     wh.content = status
     webhook(wh)
 end
@@ -43,6 +44,7 @@ function goFloat(id)
   return false
 end
 
+
 function join(world,id)
     while getBot().world ~= world:upper() do
         sendPacket(3,"action|join_request\nname|"..world:upper().."\ninvitedWorld|0")
@@ -63,74 +65,111 @@ function joinK(world)
     end
 end
 
-local total = 0
-webfucki("@everyone `SCRIPT TAKE & USE PICKAXE MADE By` <@895235665980194816>")
+local totalTake = 0
+local totalUse = 0
+
+webfucki("@everyone `SCRIPT TAKE & USE CLOTHES MADE By` <@895235665980194816>")
+
 for i = 1,#botList do
     addBot(botList[i],password)
     sleep(5000)
     setBool("Auto Reconnect",false)
     while getBot().status == "offline" or getBot().status == "login fail" do
         connect()
-        sleep(5000)
+        sleep(delayReconnect)
     end
-    if getBot().status == "online" then
-        if findItem(98) ~= 0 and not findClothes(98) then
-            joinK(acakbang(letter,char_set))
-            sleep(1000)
-            while not findClothes(98) do
-                wear(98)
+    if getBot().status == "banned" then 
+        webfucki("`"..getBot().name:upper().." BANNED`")
+        removeBot(getBot().name)
+    elseif getBot().status == "suspended" then
+        webfucki("`"..getBot().name:upper().." SUSPENDED`")
+        removeBot(getBot().name)
+    elseif getBot().status == "invalid email" then
+        webfucki("`"..getBot().name:upper().." INVALID EMAIL`")
+        removeBot(getBot().name)
+    elseif getBot().status == "aap detected" then
+        webfucki("`"..getBot().name:upper().." AAP DETECTED`")
+        removeBot(getBot().name)
+    elseif getBot().status == "online" then
+        join(worldTake,doorTake)
+        sleep(500)
+        if findItem(clothes) > 0 and not findClothes(clothes) then
+            while not findClothes(clothes) do
+                wear(clothes)
                 sleep(1000)
             end
-            if findClothes(98) then
-                webfucki("`"..getBot().name:upper().." DONE USE PICKAXE`")
+            if findClothes(clothes) and findItem(clothes) > 1 then
+                collectSet(false,3)
                 sleep(500)
-                total = total + 1
-                removeBot(getBot().name)
-            end
-        elseif findItem(98) ~= 0 and findClothes(98) then
-            if findClothes(98) then
+                while findItem(clothes) ~= 1 do
+                    drop(clothes,(findItem(clothes)-1))
+                    sleep(1000)
+                end
                 joinK(acakbang(letter,char_set))
                 sleep(1000)
-                webfucki("`"..getBot().name:upper().." ALREADY USING PICKAXE`")
-                sleep(500)
-                total = total + 1
+                webfucki("`"..getBot().name:upper().." DONE USE CLOTHES`")
+                totalTake = totalTake + 1
                 removeBot(getBot().name)
-            end
-        elseif findItem(98) == 0 then 
-            join(worldPX,doorPX)
-            sleep(1000)
-            if scanFloat(98) > 0 then
-                goFloat(98)
+                sleep(500)
+            elseif findClothes(clothes) and findItem(clothes) == 1 then
+                joinK(acakbang(letter,char_set))
                 sleep(1000)
-                if findItem(98) > 1 then
+                webfucki("`"..getBot().name:upper().." DONE USE CLOTHES`")
+                totalTake = totalTake + 1
+                removeBot(getBot().name)
+                sleep(500)
+            end
+        elseif findItem(clothes) > 0 and findClothes(clothes) then
+            joinK(acakbang(letter,char_set))
+            sleep(1000)
+            webfucki("`"..getBot().name:upper().." ALREADY USING CLOTHES`")
+            totalUse = totalUse + 1
+            removeBot(getBot().name)
+        elseif findItem(clothes) == 0 and not findClothes(clothes) then
+            if scanFloat(clothes) > 0 then
+                goFloat(clothes)
+                sleep(500)
+                if findItem(clothes) > 1 then
                     collectSet(false,3)
-                    sleep(500)
-                    while findItem(98) ~= 1 do
+                    sleep(1000)
+                    while findItem(clothes) ~= 1 do
                         move(-1,0)
                         sleep(1000)
-                        drop(98,(findItem(98)-1))
-                        sleep(500)
-                    end
-                    while not findClothes(98) do
-                        wear(98)
+                        drop(clothes,(findItem(clothes)-1))
                         sleep(900)
                     end
-                    if findClothes(98) then
-                        joinK(acakbang(letter,char_set))
+                    while not findClothes(clothes) do
+                        wear(clothes)
                         sleep(1000)
-                        webfucki("`"..getBot().name:upper().." DONE USE PICKAXE`")
-                        sleep(500)            
+                    end
+                    if findClothes(clothes) then
+                        joinK(acakbang(letter,char_set))
+                        sleep(500)
+                        webfucki("`"..getBot().name:upper().." DONE USE CLOTHES`")
+                        totalTake = totalTake + 1
                         removeBot(getBot().name)
-                        total = total + 1
+                        sleep(500)
+                    end
+                elseif findItem(clothes) == 1 and not findClothes(clothes) then
+                    joinK(acakbang(letter,char_set))
+                    sleep(1000)
+                    while not findClothes(clothes) do
+                        wear(clothes)
+                        sleep(1000)
+                    end
+                    if findClothes(clothes) then
+                        webfucki("`"..getBot().name:upper().." DONE USE CLOTHES`")
+                        totalTake = totalTake + 1
+                        sleep(500)
+                        removeBot(getBot().name)
                     end
                 end
-            elseif scanFloat(98) == 0 then
-                webfucki("PICKAXE SUDAH HABIS")
+            elseif scanFloat(clothes) == 0 then
+                webfucki("`"..getBot().name:upper().." NO CLOTHES AT : "..getBot().world:upper().."`")
                 removeBot(getBot().name)
-                error()
             end
         end
     end
 end
-webfucki("`TOTAL BOT USING PICKAXE : `"..total)
-error()
+webfucki(totalTake.." BOT TAKE & USE CLOTHES")
+webfucki(totalUse.." BOT ALREADY USE CLOTHES")
