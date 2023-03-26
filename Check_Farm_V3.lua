@@ -68,5 +68,5 @@ for i = 1, #farmList do
         foundNukedFarm = true
     end
 end
-webfucki("`TOTAL NUKED :"..total.." WORLD`")
+webfucki("`TOTAL NUKED : "..total.." WORLD`")
 removeBot(getBot().name)
