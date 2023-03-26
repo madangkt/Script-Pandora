@@ -38,16 +38,20 @@ function webfucki(status)
 end
 
 local foundNukedFarm = false --[ DON'T CHANGE!!! ]--
+
 local total = 0
+local hah = 0
+local NUKED = false --[ DON'T CHANGE!!! ]--
+webfucki("@everyone `SCRIPT CHECK FARM MADE By : `<@895235665980194816>")
 for i = 1, #farmList do
-    local hah = 0
-    local NUKED = false --[ DON'T CHANGE!!! ]--
     while getBot().world ~= farmList[i]:upper() and not NUKED do
         sendPacket(3, "action|join_request\nname|"..farmList[i].."\ninvitedWorld|0")
         sleep(6000)
         if hah == 5 then
             NUKED = true
             total = total + 1
+            hah = 0
+            break
         else
             hah = hah + 1
         end
