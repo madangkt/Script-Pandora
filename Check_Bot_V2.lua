@@ -30,7 +30,7 @@ for i = 1,#botList do
         log(getBot().name.." | AAP DETECTED")
         pshell("`"..getBot().name:upper().." | AAP DETECTED`")
         sleep(800)
-        removeBot(getBot.name)
+        removeBot(getBot().name)
     elseif getBot().status == "suspended" then
         log(getBot().name.." | SUSPENDED")
         pshell("`"..getBot().name:upper().." | SUSPENDED`")
