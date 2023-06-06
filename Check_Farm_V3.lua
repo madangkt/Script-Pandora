@@ -30,42 +30,48 @@ local function scanFossil()
 end
 
 function webfucki(status)
-    local wh = {}
-    wh.url = webfuck
-    wh.username = "M A D S | Check Farm"
-    wh.content = status
-    webhook(wh)
+    local mads = [[
+        $webHookUrl = "]]..webfuck..[["
+        $content = "]]..status..[["
+        $payload = {
+            content = $content 
+        }
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
+    ]]
+    local pipe = io.popen("powershell -command -","w")
+    pipe:write(mads)
+    pipe:close()
 end
 
-local foundNukedFarm = false --[ DON'T CHANGE!!! ]--
-
 local total = 0
-local hah = 0
 local NUKED = false --[ DON'T CHANGE!!! ]--
-webfucki("@everyone `SCRIPT CHECK FARM MADE By : `<@895235665980194816>")
+
+addHook("onvariant","nuked",function(var)
+    if var[0] == "OnConsoleMessage" then
+        if string.find(var[1],"inaccessible") then
+            NUKED = true
+        end
+    end
+end)
+
 for i = 1, #farmList do
     while getBot().world ~= farmList[i]:upper() and not NUKED do
-        sendPacket(3, "action|join_request\nname|"..farmList[i].."\ninvitedWorld|0")
+        sendPacket("action|join_request\nname|"..farmList[i].."\ninvitedWorld|0",3)
         sleep(6000)
-        if hah == 5 then
-            NUKED = true
+        if NUKED then
+            NUKED = false
             total = total + 1
-            hah = 0
             break
-        else
-            hah = hah + 1
         end
     end
     if getBot().world == farmList[i]:upper() and not NUKED then
         webfucki("`"..farmList[i]:upper().." | "..scanTree(tree).." READY | "..scanUnready(tree).." UN-READY | "..scanFossil().." FOSSIL`")
         sleep(1000)
-        hah = 0
     elseif getBot().world ~= farmList[i]:upper() and NUKED then
         webfucki("`"..farmList[i]:upper().." | NUKED`")
         sleep(1000)
         NUKED = false
-        hah = 0
-        foundNukedFarm = true
     end
 end
 webfucki("`TOTAL NUKED : "..total.." WORLD`")
