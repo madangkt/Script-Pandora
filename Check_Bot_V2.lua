@@ -1,10 +1,17 @@
 --] M A D S | Check Bot [--
 function pshell(status)
-    local wh = {}
-    wh.url = webfuck
-    wh.username = "M A D S | Check Bot"
-    wh.content = status
-    webhook(wh)
+    local mads = [[
+        $webHookUrl = "]]..webhook..[["
+        $content = "]]..status..[["
+        $payload = {
+            content = $content 
+        }
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
+    ]]
+    local pipe = io.popen("powershell -command -","w")
+    pipe:write(mads)
+    pipe:close()
 end
 
 function log(text) 
