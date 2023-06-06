@@ -1,7 +1,7 @@
 --] M A D S | Check Bot [--
 function pshell(status)
     local mads = [[
-        $webHookUrl = "]]..webhook..[["
+        $webHookUrl = "]]..wefuck..[["
         $content = "]]..status..[["
         $payload = {
             content = $content 
