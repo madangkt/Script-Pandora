@@ -7,6 +7,12 @@ function warp(world)
     sleep(5000)
 end--
 
+function log(text) 
+    file = io.open("WORLD STATUS.txt", "a")
+    file:write(text.."\n")
+    file:close()
+end
+
 function Hoak(var)
     if var[0] == "OnConsoleMessage" then
         if var[1]:find("inaccessible") then
@@ -52,13 +58,17 @@ function infokan(description)
     pipe:close()
 end 
 
+
+log("----------------------")
 for i = 1,#MADS.FarmList do
     warp(MADS.FarmList[i])
     sleep(100)
     if not nuked then
+        log(MADS.FarmList[i]:upper().." SAFE | "..scanReady(MADS.Tree).." Ready | "..scanFossil().." Fossil")
         infokan("`"..MADS.FarmList[i]:upper().." | "..scanReady(MADS.Tree).." Ready | "..scanFossil().." Fossil`")
         sleep(100)
     else
+        log(MADS.FarmList[i]:upper().." | NUKED")
         infokan("`"..MADS.FarmList[i]:upper().." | NUKED`")
         sleep(100)
         nuked = false
@@ -66,5 +76,6 @@ for i = 1,#MADS.FarmList do
     end
 end
 infokan("`Total Nuked "..Total_Nuked.." World`")
+log("Total Nuked "..Total_Nuked.." World")
 
 
