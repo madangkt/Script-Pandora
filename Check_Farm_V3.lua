@@ -88,6 +88,6 @@ function Olympus_Multhod()
     removeHooks()
 end
 
-if app == olympus or app == multhod then
+if app == "olympus" or app == "multhod" then
     Olympus_Multhod()
 end
