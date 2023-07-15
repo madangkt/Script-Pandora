@@ -105,9 +105,11 @@ for index,world in pairs(CONFIG.Farm_List) do
             end
         else
             print(world:upper()..' Have Wrong Door id!') 
+            Wrong_Door = false
         end
     else
         print(world:upper()..' Has Been Nuked!')
+        Nuked = false
     end
 end
 
