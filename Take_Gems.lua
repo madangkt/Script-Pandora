@@ -1,11 +1,10 @@
---[ Don't Change ]--
 Nuked = false 
 Wrong_Door = false
 
 function scanfloat(id)
     local count = 0
     for _, obj in pairs(getObjects()) do
-        if obj.id == itemid then
+        if obj.id == id then
             count = count + obj.count
         end
     end
@@ -91,14 +90,14 @@ for index,world in pairs(CONFIG.Farm_List) do
                 sleep(100)
                 for index,obj in pairs(getObjects()) do
                     if obj.id == 112 then
-                        if getTile(math.floor(obj.x / 32),obj.y / 32).flags == 0 then
+                        if getTile(math.floor((obj.x + 10) / 32),(obj.y + 10) / 32).flags == 0 then
                             if findItem(112) >= CONFIG.Pack.Trigger and CONFIG.Pack.Buy then
                                 warp(CONFIG.Storage.Name,CONFIG.Storage.Door)
                                 Drop(CONFIG.Pack.Debug)
                                 sleep(100)
                                 goto join
                             end
-                            findPath(math.floor(obj.x / 32),math.floor(obj.y / 32))
+                            findPath(math.floor((obj.x + 10) / 32),math.floor((obj.y + 10) / 32))
                             sleep(CONFIG.Delay.FindPath)
                         end
                     end
