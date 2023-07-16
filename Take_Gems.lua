@@ -57,8 +57,12 @@ function Drop(pack)
     while findItem(112) >= CONFIG.Pack.Price do
         sendPacket("action|buy\nitem|"..pack,2)
         sleep(CONFIG.Delay.BuyPack)
+        if findItem(112) < CONFIG.Pack.Price then
+            break
+        end
     end
-    for i = 1,CONFIG.Pack.List do
+
+    for i = 1,#CONFIG.Pack.List do
         if findItem(CONFIG.Pack.List[i]) > 0 then
             local waduh = 0 
             while findItem(CONFIG.Pack.List[i]) > 0 do
@@ -90,7 +94,7 @@ for index,world in pairs(CONFIG.Farm_List) do
                 sleep(100)
                 for _,tile in pairs(getTiles()) do 
                     for _,obj in pairs(getObjects()) do
-                        if tile.y ~= 0 and tile.flags == 0 and scanfloat(112) ~= CONFIG.Minimum_Gems then
+                        if tile.y ~= 0 and tile.flags == 0 and scanfloat(112) >= CONFIG.Minimum_Gems then
                             if findItem(112) >= CONFIG.Pack.Trigger and CONFIG.Pack.Buy then
                                 warp(CONFIG.Storage.Name,CONFIG.Storage.Door)
                                 Drop(CONFIG.Pack.Debug)
@@ -104,7 +108,7 @@ for index,world in pairs(CONFIG.Farm_List) do
                                 findPath(tile.x,tile.y + 1)
                                 sleep(CONFIG.Delay.FindPath)
                             else
-                                findPath(tile.x,tile.y + 1)
+                                findPath(tile.x,tile.y)
                                 sleep(CONFIG.Delay.FindPath)
                             end
                         end
