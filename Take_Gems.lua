@@ -80,7 +80,6 @@ end
 
 say("`cSCRIPT MADE By `4Madang.EXE#6264")
 sleep(1000)
-
 for index,world in pairs(CONFIG.Farm_List) do
     ::join::
     warp(world,CONFIG.Door_Farm)
@@ -89,30 +88,19 @@ for index,world in pairs(CONFIG.Farm_List) do
             if scanfloat(112) >= CONFIG.Minimum_Gems then
                 collectSet(true,CONFIG.Range_Collect)
                 sleep(100)
-                local tiles = {}
-                print("Scanning Tile")
                 for _,obj in pairs(getObjects()) do
                     if obj.id == 112 then
-                        table.insert(tiles,
-                            {
-                                x = math.floor(obj.x / 32),
-                                y = math.floor(obj.y / 32),
-                            }
-                        )
-                    end
-                end
-                print("Done Scanning Tile")
-                for index,tile in pairs(tiles) do
-                    if scanfloat(112) >= CONFIG.Minimum_Gems then
-                        if findItem(112) >= CONFIG.Pack.Trigger and CONFIG.Pack.Buy then
-                            warp(CONFIG.Storage.Name,CONFIG.Storage.Door)
-                            Drop(CONFIG.Pack.Debug)
-                            sleep(100)
-                            goto join
-                        end
-                        if getTile(tile.x,tile.y).flags == 0 then
-                            findPath(tile.x,tile.y)
-                            sleep(CONFIG.Delay.FindPath)
+                        if scanfloat(112) >= CONFIG.Minimum_Gems then
+                            if getTile(math.floor(obj.x / 32),math.floor(obj.y / 32)).flags == 0 then
+                                if findItem(112) >= CONFIG.Pack.Trigger and CONFIG.Pack.Buy then
+                                    warp(CONFIG.Storage.Name,CONFIG.Storage.Door)
+                                    Drop(CONFIG.Pack.Debug)
+                                    sleep(100)
+                                    goto join
+                                end
+                                findPath(math.floor(obj.x / 32),math.floor(obj.y / 32))
+                                sleep(CONFIG.Delay.FindPath)
+                            end
                         end
                     end
                 end
