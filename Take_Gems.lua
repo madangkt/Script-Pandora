@@ -90,11 +90,9 @@ for index,world in pairs(CONFIG.Farm_List) do
                 sleep(100)
                 local tiles = {}
                 print("Scanning Tile")
-                for Y = 1,53 do
-                    for X = 1,99 do
-                        if getTile(X,Y).flags == 0 then
-                            table.insert(tiles,{x = X,y = Y})
-                        end
+                for _,obj in pairs(getObjects()) do
+                    if obj.id == 112 then
+                        table.insert(tiles,{x = obj.x / 32,y = obj.y / 32})
                     end
                 end
                 print("Done Scanning Tile")
@@ -106,16 +104,8 @@ for index,world in pairs(CONFIG.Farm_List) do
                             sleep(100)
                             goto join
                         end
-                        if getTile(tile.x,tile.y + 2).flags == 0 then
-                            findPath(tile.x,tile.y + 2)
-                            sleep(CONFIG.Delay.FindPath)
-                        elseif getTile(tile.x,tile.y + 1).flags == 0 then
-                            findPath(tile.x,tile.y + 1)
-                            sleep(CONFIG.Delay.FindPath)
-                        else
-                            findPath(tile.x,tile.y)
-                            sleep(CONFIG.Delay.FindPath)
-                        end
+                        findPath(tile.x,tile.y)
+                        sleep(CONFIG.Delay.FindPath)
                     end
                 end
 
