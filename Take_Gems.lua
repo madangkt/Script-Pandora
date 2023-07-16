@@ -90,15 +90,23 @@ for index,world in pairs(CONFIG.Farm_List) do
                 sleep(100)
                 for _,tile in pairs(getTiles()) do 
                     for _,obj in pairs(getObjects()) do
-                        if obj.id == 112 and getTile(tile.x,tile.y).flags == 0 then
+                        if tile.y ~= 0 and tile.flags == 0 and scanfloat(112) ~= CONFIG.Minimum_Gems then
                             if findItem(112) >= CONFIG.Pack.Trigger and CONFIG.Pack.Buy then
                                 warp(CONFIG.Storage.Name,CONFIG.Storage.Door)
                                 Drop(CONFIG.Pack.Debug)
                                 sleep(100)
                                 goto join
                             end
-                            findPath(math.floor((obj.x + 10) / 32),math.floor((obj.y + 10) / 32))
-                            sleep(CONFIG.Delay.FindPath)
+                            if getTile(tile.x,tile.y + 2).flags == 0 then
+                                findPath(tile.x,tile.y + 2)
+                                sleep(CONFIG.Delay.FindPath)
+                            elseif getTile(tile.x,tile.y + 1).flags == 0 then
+                                findPath(tile.x,tile.y + 1)
+                                sleep(CONFIG.Delay.FindPath)
+                            else
+                                findPath(tile.x,tile.y + 1)
+                                sleep(CONFIG.Delay.FindPath)
+                            end
                         end
                     end
                 end
