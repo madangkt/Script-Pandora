@@ -80,6 +80,7 @@ end
 
 say("`cSCRIPT MADE By `4Madang.EXE#6264")
 sleep(1000)
+
 for index,world in pairs(CONFIG.Farm_List) do
     ::join::
     warp(world,CONFIG.Door_Farm)
@@ -92,7 +93,12 @@ for index,world in pairs(CONFIG.Farm_List) do
                 print("Scanning Tile")
                 for _,obj in pairs(getObjects()) do
                     if obj.id == 112 then
-                        table.insert(tiles,{x = obj.x / 32,y = obj.y / 32})
+                        table.insert(tiles,
+                            {
+                                x = math.floor(obj.x / 32),
+                                y = math.floor(obj.y / 32),
+                            }
+                        )
                     end
                 end
                 print("Done Scanning Tile")
@@ -104,11 +110,12 @@ for index,world in pairs(CONFIG.Farm_List) do
                             sleep(100)
                             goto join
                         end
-                        findPath(tile.x,tile.y)
-                        sleep(CONFIG.Delay.FindPath)
+                        if getTile(tile.x,tile.y).flags == 0 then
+                            findPath(tile.x,tile.y)
+                            sleep(CONFIG.Delay.FindPath)
+                        end
                     end
                 end
-
             end
         else
             print(world:upper()..' Have Wrong Door id!') 
