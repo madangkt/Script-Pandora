@@ -1,3 +1,4 @@
+--] M A D S | Check Bot [--
 World_Locked = false
 Nuked = false
 List_Lock = {202,204,206,242,1796,7188,9640,4802,5814,8470,5980,2950,5260,4482,2408,10410,11550,11586}
@@ -51,7 +52,7 @@ for index,bot in pairs(MADS.Bot) do
             addBot(tuyul,bot.Password)
             sleep(3000)
         end
-        
+
         while getBot().status == 'login fail' or getBot().status == 'offline' do
             connect()
             sleep(MADS.DelayConnect)
@@ -92,6 +93,9 @@ for index,bot in pairs(MADS.Bot) do
                         pshell('`'..getBot().name:upper()..' | '..getBot().status:upper()..' | '..getBot().world:upper()..'`')
                         sleep(1500)
                     end
+                else
+                    Nuked = false
+                    goto join
                 end
             else
                 log(getBot().name:upper()..' | '..getBot().status:upper())
@@ -104,3 +108,4 @@ for index,bot in pairs(MADS.Bot) do
     end
     ::skip::
 end
+
