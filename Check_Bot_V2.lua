@@ -66,6 +66,8 @@ for index,bot in pairs(MADS.Bot) do
             log(getBot().name:upper()..' | '..getBot().status:upper())
             pshell('`'..getBot().name:upper()..' | '..getBot().status:upper()..'`')
             sleep(1500)
+            removeBot(getBot().name)
+            sleep(2000)
         elseif getBot().status == 'online' then
             if MADS.RandomWorld then
                 ::join::
