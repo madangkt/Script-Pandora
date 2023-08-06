@@ -2,9 +2,22 @@ Total_Nuked = 0
 nuked = false
 
 local function warp(world)
-    sendPacket("action|join_request\nname|"..world:upper().."\ninvitedWorld|0",3)
-    sleep(MADS.DelayWarp)
+    if MADS.Use_Hook then
+        sendPacket("action|join_request\nname|"..world:upper().."\ninvitedWorld|0",3)
+        sleep(MADS.DelayWarp) 
+    else
+        for i = 1,5 do
+            if getBot().world ~= world:upper() then
+                sendPacket("action|join_request\nname|"..world:upper().."\ninvitedWorld|0",3)
+                sleep(MADS.DelayWarp)
+            end
+        end
+        if getBot().world ~= world:upper() then
+            nuked = true
+        end
+    end
 end--
+
 local function log(text) 
     if MADS.Input_Txt then
         file = io.open("WORLD STATUS.txt", "a")
@@ -58,14 +71,17 @@ local function infokan(description)
         pipe:close()
     end
 end
-addHook('onvariant','aseli',function(var)
-    if string.find(var[0],'OnConsoleMessage') then
-        if string.find(var[1],'inaccessible') then
-            nuked = true
+if MADS.Use_Hook then
+    addHook('onvariant','aseli',function(var)
+        if string.find(var[0],'OnConsoleMessage') then
+            if string.find(var[1],'inaccessible') then
+                nuked = true
+            end
         end
-    end
-end)
+    end)
+end
 log("-----------------------------------------------")
+
 while true do
     for i = 1,#MADS.FarmList do
         warp(MADS.FarmList[i])
@@ -94,3 +110,4 @@ while true do
         break
     end
 end
+
