@@ -6,9 +6,11 @@ local function warp(world)
     sleep(MADS.DelayWarp)
 end--
 local function log(text) 
-    file = io.open("WORLD STATUS.txt", "a")
-    file:write(text.."\n")
-    file:close()
+    if MADS.Input_Txt then
+        file = io.open("WORLD STATUS.txt", "a")
+        file:write(text.."\n")
+        file:close()
+    end
 end
 local function scanFossil()
     local count = 0
@@ -41,18 +43,20 @@ local function UnReady(id)
     return count
 end
 local function infokan(description)
-    local script = [[
-        $webHookUrl = "]]..MADS.Webhook..[["
-        $content = "]]..description..[["
-        $payload = @{
-            content = $content 
-        }
-        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-        Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
-    ]]
-    local pipe = io.popen("powershell -command -", "w")
-    pipe:write(script)
-    pipe:close()
+    if MADS.Input_Webhook then
+        local script = [[
+            $webHookUrl = "]]..MADS.Webhook..[["
+            $content = "]]..description..[["
+            $payload = @{
+                content = $content 
+            }
+            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+            Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
+        ]]
+        local pipe = io.popen("powershell -command -", "w")
+        pipe:write(script)
+        pipe:close()
+    end
 end
 addHook('onvariant','aseli',function(var)
     if string.find(var[0],'OnConsoleMessage') then
