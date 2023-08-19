@@ -5,7 +5,7 @@ if Application:lower() == 'olympus' then
         for accType, accList in pairs(Bot_List) do
             if accType:lower() == 'guest' then
                 for index, bot in ipairs(accList) do
-                    if indexBot >= 3 then
+                    if indexBot >= Proxy_List.Max_Bot then
                         indexProxy = indexProxy + 1
                         if indexProxy > #Proxy_List.List then
                             goto skip
@@ -21,7 +21,7 @@ if Application:lower() == 'olympus' then
                 end
             elseif accType:lower() == 'cid' then
                 for index,bot in ipairs(accList) do
-                    if indexBot >= 3 then
+                    if indexBot >= Proxy_List.Max_Bot then
                         indexProxy = indexProxy + 1
                         if indexProxy > #Proxy_List.List then
                             goto skip
