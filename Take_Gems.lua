@@ -100,13 +100,13 @@ end
 
 function cekGems()
     for index,obj in pairs(getObjects()) do
-        if obj.id == 112 and obj.count >= CONFIG.Minimum_Gems then
-            if getTile(obj.x / 32,obj.y / 32).flags == 0 then
+        if obj.id == 112 then
+            if getTile(math.floor(obj.x / 32),math.floor(obj.y / 32)).flags == 0 then
                 table.insert(
                     List_Gems,
                     {
-                        x = obj.x / 32,
-                        y = obj.y / 32
+                        x = math.floor(obj.x / 32),
+                        y = math.floor(obj.y / 32)
                     }
                 )                
             end
