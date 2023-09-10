@@ -66,6 +66,7 @@ function Drop(pack,world,x,y)
         end
     end
     if cek() then
+        warp(CONFIG.Storage.Name,CONFIG.Storage.Door)
         collectSet(false)
         sleep(50)
         goPos(CONFIG.Storage.Pos_Drop)
