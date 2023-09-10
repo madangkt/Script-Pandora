@@ -59,16 +59,17 @@ function Drop(pack,world,x,y)
         end
         return false 
     end
-
+    if findItem(112) >= CONFIG.Pack.Trigger then
+        while findItem(112) >= CONFIG.Pack.Price do
+            sendPacket(2,"action|buy\nitem|"..pack)
+            sleep((CONFIG.Delay.BuyPack or 2500))
+        end
+    end
     if cek() then
         collectSet(false)
         sleep(50)
         goPos(CONFIG.Storage.Pos_Drop)
         sleep(200)
-        while findItem(112) >= CONFIG.Pack.Price do
-            sendPacket(2,"action|buy\nitem|"..pack)
-            sleep((CONFIG.Delay.BuyPack or 2500))
-        end
         for i = 1,#CONFIG.Pack.List do
             if findItem(CONFIG.Pack.List[i]) > 0 then
                 while findItem(CONFIG.Pack.List[i]) > 0 do
